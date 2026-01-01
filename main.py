@@ -1,6 +1,7 @@
 import pygame
+import sys
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH #or SCREEN_WIDTH, SCREEN_HEIGHT
-from logger import log_state
+from logger import log_state, log_event
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
@@ -33,6 +34,11 @@ def main():
         for item in drawable:
             item.draw(screen)
         updatable.update(dt)
+        for asteroid in asteroids:
+            if player.collides_with(asteroid):
+                log_event("player_hit")
+                print("Player hit an asteroid!\nGame over!")
+                sys.exit()
         pygame.display.flip()
 
         # Limit the frame rate to 60 FPS and calculate delta time
