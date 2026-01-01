@@ -1,20 +1,17 @@
 import pygame
-from constants import * #or SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH #or SCREEN_WIDTH, SCREEN_HEIGHT
 from logger import log_state
-from player import *
+from player import Player
 
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    VERSION = pygame.version.ver
-    print(f"Starting Asteroids with pygame version: {VERSION}")
-    print(f"Screen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}")
     clock = pygame.time.Clock()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) # Create a clock object to manage frame rate
     dt = 0 # Delta time between frames
 
-    while 1 > 0:
+    while True:
         log_state()
 
         for event in pygame.event.get(): # Event handling for quitting the game
@@ -26,6 +23,7 @@ def main():
         player.update(dt)
         pygame.display.flip()
 
+        # Limit the frame rate to 60 FPS and calculate delta time
         dt = clock.tick(60) / 1000.0
 
 
